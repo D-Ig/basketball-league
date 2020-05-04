@@ -6,6 +6,14 @@ module.exports = {
     'plugin:prettier/recommended',
     'prettier/react',
   ],
+  overrides: [
+    {
+      files: ['**/*.tsx'],
+      rules: {
+        'react/prop-types': 'off',
+      },
+    },
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
