@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
+import Loading from './Loading';
 import useFetchArticle from '../hooks/useFetchArticle';
+import type { FC } from 'react';
 
 const ArticleCard: FC = () => {
   const { teamId, articleId } = useParams();
-  const { error, loading, article } = useFetchArticle(teamId, articleId);
+  const { loading, article } = useFetchArticle(teamId, articleId);
 
   if (!article) {
     return null;
@@ -14,9 +16,8 @@ const ArticleCard: FC = () => {
 
   return (
     <div className='panel'>
-      {error && <h1>Some error occured</h1>}
       {loading ? (
-        <h1>Loading</h1>
+        <Loading />
       ) : (
         <article className='article'>
           <h1 className='header'>{title}</h1>

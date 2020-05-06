@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from 'react';
 import { parse } from 'query-string';
-import { Player } from '../interfaces';
 import { getPlayers } from '../dummy/api';
+import type { Player } from '../interfaces';
 
 type PlayersState = {
   error: null | Error;
@@ -35,7 +35,7 @@ const reducer = (state: PlayersState, action: Action): PlayersState => {
 
 const useFetchPlayers = (querystring: string): PlayersState => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { teamId } = parse(querystring); // oh-eh...
+  const { teamId } = parse(querystring);
 
   const get = async (teamId?: string): Promise<void> => {
     try {

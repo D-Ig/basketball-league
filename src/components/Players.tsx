@@ -1,23 +1,21 @@
-import React, { FC, ReactElement } from 'react';
-import { useLocation, useRouteMatch, Route } from 'react-router-dom';
-// import React, { FC } from 'react';
-// import { useLocation, useRouteMatch } from 'react-router-dom';
+import React from 'react';
+import { Route, useLocation, useRouteMatch } from 'react-router-dom';
 import slug from 'slug';
+import Error from './Error';
 import PlayerCard from './PlayerCard';
 import SideBar from './Sidebar';
 import useFetchPlayers from '../hooks/useFetchPlayers';
+import type { FC, ReactElement } from 'react';
 
 const Players: FC = () => {
   const { pathname, search } = useLocation();
   const { path } = useRouteMatch();
   const { error, loading, players } = useFetchPlayers(search);
 
-  // const match = useRouteMatch(`${path}/:playerId`);
-
   return (
     <div className='container two-column'>
       {error ? (
-        <h1>Some error occured</h1>
+        <Error />
       ) : (
         <>
           <SideBar
@@ -35,18 +33,9 @@ const Players: FC = () => {
                 player={players.find(
                   ({ name }) => slug(name) === match.params.playerId,
                 )}
-                loading={loading}
               />
             )}
           />
-          {/* {match ? (
-            <PlayerCard
-              loading={loading}
-              player={players.find(
-                ({ name }) => slug(name) === match.params.playerId,
-              )}
-            />
-          ) : null} */}
         </>
       )}
     </div>

@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
+import type { FC } from 'react';
 
 const Fallback: FC = () => <Redirect to='/' />;
 

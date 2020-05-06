@@ -1,20 +1,21 @@
-import React, { FC, ReactElement } from 'react';
+import React from 'react';
 import { useLocation, useRouteMatch, Route } from 'react-router-dom';
 import slug from 'slug';
-import TeamCard from './TeamCard';
+import Error from './Error';
 import SideBar from './Sidebar';
+import TeamCard from './TeamCard';
 import useFetchTeamNames from '../hooks/useFetchTeamNames';
+import type { FC, ReactElement } from 'react';
 
 const Teams: FC = () => {
   const { pathname } = useLocation();
   const { path } = useRouteMatch();
-
   const { error, loading, teamNames } = useFetchTeamNames();
 
   return (
     <div className='container two-column'>
       {error ? (
-        <h1>Some error occured</h1>
+        <Error />
       ) : (
         <>
           <SideBar title='Teams' list={teamNames} isLoading={loading} />

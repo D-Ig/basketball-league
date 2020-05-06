@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from 'react';
-import { Team } from '../interfaces';
 import { getTeam } from '../dummy/api';
+import type { Team } from '../interfaces';
 
 type TeamState = {
   error: null | Error;

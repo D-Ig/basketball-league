@@ -1,6 +1,8 @@
-import React, { FC, lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Loading from './Loading';
 import NavBar from './NavBar';
+import type { FC } from 'react';
 
 const Articles = lazy(() => import('./Articles'));
 const Fallback = lazy(() => import('./Fallback'));
@@ -13,7 +15,7 @@ const App: FC = () => (
   <Router>
     <div>
       <NavBar />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <Switch>
           <Route path='/' exact>
             <Home />
@@ -30,8 +32,10 @@ const App: FC = () => (
           <Route path='/:teamId/articles'>
             <Articles />
           </Route>
-          {/* fix, not working */}
-          <Route component={Fallback} />
+          <Route>
+            {/* fix, not working */}
+            <Fallback />
+          </Route>
         </Switch>
       </Suspense>
     </div>

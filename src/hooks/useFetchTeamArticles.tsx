@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from 'react';
-import { TeamArticle } from '../interfaces';
 import { getTeamsArticles } from '../dummy/api';
+import type { TeamArticle } from '../interfaces';
 
 type ArticlesState = {
   error: null | Error;
@@ -33,7 +33,6 @@ const reducer = (state: ArticlesState, action: Action): ArticlesState => {
 };
 
 const useFetchTeamArticles = (teamId: string | undefined): ArticlesState => {
-  // think about proper typing
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const get = async (id: string): Promise<void> => {

@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import TeamLogo from './TeamLogo';
 import useFetchTeamNames from '../hooks/useFetchTeamNames';
+import type { FC } from 'react';
 
 const Home: FC = () => {
   const { teamNames } = useFetchTeamNames();

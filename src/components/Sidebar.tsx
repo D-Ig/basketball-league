@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import slug from 'slug';
+import Loading from './Loading';
+import type { FC } from 'react';
 
 type SideBarProps = {
   title: string;
@@ -13,7 +15,7 @@ const SideBar: FC<SideBarProps> = ({ title, list, isLoading }) => {
   const { search } = useLocation();
 
   return isLoading ? (
-    <h1>LOADING</h1>
+    <Loading />
   ) : (
     <div>
       <h3 className='header'>{title}</h3>

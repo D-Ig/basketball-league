@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
-import { useParams, Route, useRouteMatch } from 'react-router-dom';
+import React from 'react';
+import { Route, useParams, useRouteMatch } from 'react-router-dom';
 import ArticleCard from './ArticleCard';
+import Error from './Error';
 import SideBar from './Sidebar';
 import useFetchTeamArticles from '../hooks/useFetchTeamArticles';
+import type { FC } from 'react';
 
 const Articles: FC = () => {
   const { teamId } = useParams();
@@ -12,7 +14,7 @@ const Articles: FC = () => {
   return (
     <div className='container two-column'>
       {error ? (
-        <h1>Some error occured</h1>
+        <Error />
       ) : (
         <>
           <SideBar

@@ -1,26 +1,27 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import Loading from './Loading';
 import TeamLogo from './TeamLogo';
 import useFetchTeam from '../hooks/useFetchTeam';
+import type { FC } from 'react';
 
 type TeamCardProps = {
   teamName: string | undefined;
 };
 
 const TeamCard: FC<TeamCardProps> = ({ teamName }) => {
-  const { error, loading, team } = useFetchTeam(teamName);
+  const { loading, team } = useFetchTeam(teamName);
 
   if (!team) {
-    return null;
+    return <Loading />;
   }
 
   const { coach, established, id, manager, name } = team;
 
   return (
     <div className='panel'>
-      {error && <h1>Some error occured</h1>}
       {loading ? (
-        <h1>Loading</h1>
+        <Loading />
       ) : (
         <div style={{ width: '100%' }}>
           <TeamLogo id={id} />

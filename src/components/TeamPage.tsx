@@ -1,16 +1,18 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Link, useParams, useRouteMatch } from 'react-router-dom';
 import slug from 'slug';
 import { stringify } from 'query-string';
+import Error from './Error';
+import Loading from './Loading';
 import TeamLogo from './TeamLogo';
-import useFetchTeamArticles from '../hooks/useFetchTeamArticles';
 import useFetchTeam from '../hooks/useFetchTeam';
+import useFetchTeamArticles from '../hooks/useFetchTeamArticles';
+import type { FC } from 'react';
 
 const TeamPage: FC = () => {
   const { teamId } = useParams();
   const { url } = useRouteMatch();
   const { error, loading, team } = useFetchTeam(teamId);
-
   const {
     error: articlesError,
     loading: articlesLoading,
@@ -18,7 +20,7 @@ const TeamPage: FC = () => {
   } = useFetchTeamArticles(teamId);
 
   if (!team) {
-    return null;
+    return <Loading />;
   }
 
   const {
@@ -33,13 +35,13 @@ const TeamPage: FC = () => {
   } = team;
 
   if (error || articlesError) {
-    return <h1>Some error occured</h1>;
+    return <Error />;
   }
 
   return (
     <div className='panel'>
       {loading || articlesLoading ? (
-        <h1>LOADING</h1>
+        <Loading />
       ) : (
         <>
           <TeamLogo id={id} />
@@ -76,12 +78,12 @@ const TeamPage: FC = () => {
           </ul>
           <h2 className='header'>Articles</h2>
           <ul className='articles'>
-            {articles.map(article => (
-              <li key={article.id}>
-                <Link to={`${url}/articles/${slug(article.title)}`}>
-                  <h4 className='article-title'>{article.title}</h4>
+            {articles.map(({ date, id, title }) => (
+              <li key={id}>
+                <Link to={`${url}/articles/${slug(title)}`}>
+                  <h4 className='article-title'>{title}</h4>
                   <div className='article-date'>
-                    {article.date.toLocaleDateString()}
+                    {date.toLocaleDateString('en-GB')}
                   </div>
                 </Link>
               </li>

@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from 'react';
-import { Article } from '../interfaces';
 import { getArticle } from '../dummy/api';
+import type { Article } from '../interfaces';
 
 type ArticleState = {
   error: null | Error;

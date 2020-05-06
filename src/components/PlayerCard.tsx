@@ -1,22 +1,19 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { Player } from '../interfaces';
+import type { FC } from 'react';
+import type { Player } from '../interfaces';
 
 type PlayerCardProps = {
-  loading: boolean;
   player: Player | undefined;
 };
 
-const PlayerCard: FC<PlayerCardProps> = ({ loading, player }) => {
-  if (loading) {
-    return <h1>Loading</h1>;
-  }
-
+const PlayerCard: FC<PlayerCardProps> = ({ player }) => {
   if (!player) {
     return <Redirect to='/players' />;
   }
 
   const { apg, avatar, name, number, position, ppg, rpg, spg, teamId } = player;
+
   return (
     <div className='panel'>
       <img className='avatar' src={avatar} alt={`${name}'s avatar`} />

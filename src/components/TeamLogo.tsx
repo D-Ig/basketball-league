@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 import logos from '../assets/logos';
+import type { FC } from 'react';
 
 type TeamLogoProps = {
   id: string;
