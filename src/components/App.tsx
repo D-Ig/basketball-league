@@ -33,7 +33,6 @@ const App: FC = () => (
             <Articles />
           </Route>
           <Route>
-            {/* fix, not working */}
             <Fallback />
           </Route>
         </Switch>
